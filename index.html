@@ -7,26 +7,29 @@
   <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-  
+ 
   <style>
     body {
       font-family: 'Inter', system-ui, sans-serif;
-      background-color: #353535;
+      background-color: #1f1f1f;
       color: #e5e5e5;
     }
     .list-entry {
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
     }
     .list-entry:hover {
-      background-color: #1a1a1a;
+      background-color: #2a2a2a;
       transform: translateX(12px);
-      border-color: #f78355;
+      border-color: #ff6b35;
     }
     .rank {
       font-size: 2.75rem;
       font-weight: 900;
       line-height: 1;
-      color: #ab3d11;
+      color: #ff4d2e;
+    }
+    .accent {
+      color: #ff6b35;
     }
   </style>
 </head>
@@ -36,17 +39,17 @@
     <!-- Header -->
     <div class="text-center mb-16">
       <h1 class="text-6xl font-black tracking-tighter text-white">THE QTBDL</h1>
-      <p class="text-purple-400 text-2xl mt-2">The Quantam Baocessing Demon List</p>
-      <p class="text-zinc-500 mt-4">Main List • Extreme Demons</p>
+      <p class="text-orange-400 text-2xl mt-2">The Quantam Baocessing Demon List</p>
+      <p class="text-zinc-500 mt-4">Main List • Demons</p>
     </div>
 
     <!-- Search -->
     <div class="mb-10">
-      <input 
-        type="text" 
+      <input
+        type="text"
         id="searchInput"
-        placeholder="Search levels, creators, or verifiers..." 
-        class="w-full bg-zinc-900 border border-zinc-700 focus:border-purple-500 rounded-2xl px-6 py-5 text-lg outline-none transition-colors">
+        placeholder="Search levels, creators, or verifiers..."
+        class="w-full bg-zinc-900 border border-zinc-700 focus:border-orange-500 rounded-2xl px-6 py-5 text-lg outline-none transition-colors">
     </div>
 
     <!-- Demon List -->
@@ -70,10 +73,18 @@
         name: "Deadlocked",
         publisher: "RobTop",
         verifier: "Urictic",
-        id: "20",
+        id: "3",
         points: "4.68"
       },
-      // Add more levels below ↓
+      {
+        rank: 3,
+        name: "Clubstep",
+        publisher: "Robtop",
+        verifier: "Arick",
+        id: "1",
+        points: "2.83"
+      },
+      
     ];
 
     function renderDemons(filteredDemons) {
@@ -82,12 +93,12 @@
 
       filteredDemons.forEach(demon => {
         const div = document.createElement('div');
-        div.className = `list-entry group flex items-center gap-8 bg-zinc-900 border border-zinc-800 hover:border-purple-500 rounded-3xl px-8 py-7`;
+        div.className = `list-entry group flex items-center gap-8 bg-zinc-900 border border-zinc-800 hover:border-[#ff6b35] rounded-3xl px-8 py-7`;
         div.innerHTML = `
           <div class="rank w-24 text-right">${demon.rank}</div>
-          
+         
           <div class="flex-1 min-w-0">
-            <div class="text-2xl font-semibold text-white group-hover:text-purple-400 transition-colors truncate">
+            <div class="text-2xl font-semibold text-white group-hover:text-orange-400 transition-colors truncate">
               ${demon.name}
             </div>
             <div class="text-zinc-400 mt-1">
@@ -101,7 +112,7 @@
           </div>
 
           <a href="https://www.gdtracker.net/level/${demon.id}" target="_blank"
-             class="ml-4 text-purple-400 hover:text-purple-300">
+             class="ml-4 text-orange-400 hover:text-orange-300">
             <i class="fas fa-external-link-alt"></i>
           </a>
         `;
@@ -112,13 +123,13 @@
     // Search functionality
     document.getElementById('searchInput').addEventListener('input', (e) => {
       const term = e.target.value.toLowerCase().trim();
-      
-      const filtered = demons.filter(d => 
+     
+      const filtered = demons.filter(d =>
         d.name.toLowerCase().includes(term) ||
         d.publisher.toLowerCase().includes(term) ||
         d.verifier.toLowerCase().includes(term)
       );
-      
+     
       renderDemons(filtered.length ? filtered : demons);
     });
 

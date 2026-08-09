@@ -23,10 +23,24 @@
       border-color: #ff6b35;
     }
     .rank {
-      font-size: 2.75rem;
+      font-size: 3.25rem;
       font-weight: 900;
       line-height: 1;
       color: #ff4d2e;
+    }
+    .level-name {
+      font-size: 1.65rem;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+    .points {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: #10b981;
+    }
+    .points-small {
+      font-size: 1.1rem;
+      color: #10b981;
     }
     .accent {
       color: #ff6b35;
@@ -39,8 +53,8 @@
     <!-- Header -->
     <div class="text-center mb-16">
       <h1 class="text-6xl font-black tracking-tighter text-white">THE QTBDL</h1>
-      <p class="text-orange-400 text-2xl mt-2">The Quantam Baocessing Demon List</p>
-      <p class="text-zinc-500 mt-4">Main List • Demons</p>
+      <p class="text-orange-400 text-2xl mt-2">The Quantum Baocessing Demon List</p>
+      <p class="text-zinc-500 mt-4">Main List • Extreme Demons</p>
     </div>
 
     <!-- Search -->
@@ -66,23 +80,26 @@
         publisher: "motleyorc",
         verifier: "Urictic",
         id: "34085027",
-        points: "5.8"
+        points: "5.8",
+        thumbnail: "https://files.gdimages.net/levels/placeholder.jpg" // ← REPLACE THIS
       },
       {
         rank: 2,
         name: "Deadlocked",
         publisher: "RobTop",
         verifier: "Urictic",
-        id: "3",
-        points: "4.7"
+        id: "20",
+        points: "4.68",
+        thumbnail: "https://files.gdimages.net/levels/placeholder.jpg"
       },
       {
         rank: 3,
         name: "Clubstep",
-        publisher: "Robtop",
+        publisher: "RobTop",
         verifier: "Arick",
         id: "1",
-        points: "2.83"
+        points: "2.83",
+        thumbnail: "https://files.gdimages.net/levels/placeholder.jpg"
       },
       {
         rank: 4,
@@ -90,7 +107,8 @@
         publisher: "chupda",
         verifier: "Ben",
         id: "125283",
-        points: "2.82"
+        points: "2.82",
+        thumbnail: "https://files.gdimages.net/levels/placeholder.jpg"
       },
       {
         rank: 5,
@@ -98,7 +116,8 @@
         publisher: "Serponge",
         verifier: "Urictic",
         id: "45622672",
-        points: "2.1"
+        points: "2.1",
+        thumbnail: "https://files.gdimages.net/levels/placeholder.jpg"
       },
       {
         rank: 6,
@@ -107,6 +126,7 @@
         verifier: "Arick",
         id: "89886591",
         points: "1.87",
+        thumbnail: "https://files.gdimages.net/levels/placeholder.jpg"
       },
       {
         rank: 7,
@@ -115,7 +135,8 @@
         verifier: "Urictic",
         id: "186646",
         points: "1.81",
-      },
+        thumbnail: "https://files.gdimages.net/levels/placeholder.jpg"
+      }
     ];
 
     function renderDemons(filteredDemons) {
@@ -126,20 +147,27 @@
         const div = document.createElement('div');
         div.className = `list-entry group flex items-center gap-8 bg-zinc-900 border border-zinc-800 hover:border-[#ff6b35] rounded-3xl px-8 py-7`;
         div.innerHTML = `
-          <div class="rank w-24 text-right">${demon.rank}</div>
+          <div class="rank w-28 text-right">${demon.rank}</div>
          
-          <div class="flex-1 min-w-0">
-            <div class="text-2xl font-semibold text-white group-hover:text-orange-400 transition-colors truncate">
+          <div class="flex flex-col flex-1 min-w-0">
+            <!-- Thumbnail -->
+            <div class="w-full h-28 bg-zinc-800 rounded-2xl overflow-hidden mb-4 shadow-inner">
+              <img src="${demon.thumbnail}" 
+                   onerror="this.src='https://via.placeholder.com/320x180/1f1f1f/888888?text=NO+THUMBNAIL'" 
+                   class="w-full h-full object-cover" alt="${demon.name}">
+            </div>
+            
+            <div class="level-name text-white group-hover:text-orange-400 transition-colors truncate">
               ${demon.name}
             </div>
-            <div class="text-zinc-400 mt-1">
+            <div class="text-zinc-400 mt-1 text-sm">
               by <span class="text-white">${demon.publisher}</span> • Verified by <span class="text-white">${demon.verifier}</span>
             </div>
           </div>
 
           <div class="text-right">
-            <div class="text-emerald-400 font-medium text-xl">${demon.points}</div>
-            <div class="text-xs text-zinc-500">points</div>
+            <div class="points">${demon.points}</div>
+            <div class="points-small">points</div>
           </div>
 
           <a href="https://gdladder.com/level/${demon.id}" target="_blank"
